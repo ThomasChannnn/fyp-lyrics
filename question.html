@@ -43,7 +43,10 @@
 <body>
 
     <header class="navbar">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto;">
         <a href="index.html">⬅️ 返回首頁 (Back)</a>
+        <button id="theme-toggle" class="btn" style="width: auto; padding: 10px 20px; font-size: 1rem;">🌙</button>
+        </div>
     </header>
 
     <main class="container">
@@ -54,7 +57,7 @@
 
         <section class="card tone-section">
             <h3>🎁 0243填詞大法</h3>
-            <p style="color: #666; font-size: 0.9rem;">估埋對應嘅「0243」！</p>
+            <p style="color: #666; font-size: 0.9rem;">估埋對應嘅「0243」音調！</p>
             
             <button class="btn btn-reveal" onclick="showAnswer()">👀 答案</button>
             
@@ -62,13 +65,13 @@
                 </div>
         </section>
 
-        <section class="card">
-            <span class="label-text">🎵 樂譜 (Music Score)</span>
-            
-            <img id="img-score" src="" alt="Music Score" class="score-image" style="min-height: 200px; background: #eee;">
-            
-            <p id="display-source" class="source-text"></p>
-        </section>
+            <section class="card">
+                <span class="label-text">🎵 樂譜 (Music Score)</span>
+                
+                <img id="img-score" src="" alt="Music Score" class="score-image">
+                
+                <p id="display-source" class="source-text"></p>
+            </section>
 
         <section class="card" id="audio-section">
             <div class="audio-player-wrapper">
@@ -96,70 +99,70 @@
         // ---------------------------------------------------------
         const songDatabase = {
             "001": {
-                source: "歌曲來源：Old MacDonald Had a Farm",
+                source: "原曲：Old MacDonald Had a Farm",
                 tone_answer: "4-4-4-0-2-2-0",
                 image: "score/001.png",
                 melody: "melody/001.mp3",
                 backing: "backing/001.mp3"
             },
             "002": {
-                source: "歌曲來源：Twinkle Twinkle Little Star",
+                source: "原曲：Twinkle Twinkle Little Star",
                 tone_answer: "0-0-4-4-3-3-4",
                 image: "score/002.png",
                 melody: "melody/002.mp3",
                 backing: "backing/002.mp3"
             },
             "003": {
-                source: "歌曲來源：London Bridge is Falling Down",
+                source: "原曲：London Bridge is Falling Down",
                 tone_answer: "4-3-3-4-2-4-3",
                 image: "score/003.png",
                 melody: "melody/003.mp3",
                 backing: "backing/003.mp3"
             },
             "004": {
-                source: "歌曲來源：Happy Birthday to You",
+                source: "原曲：Happy Birthday to You",
                 tone_answer: "0-0-2-0-4-2",
                 image: "score/004.png",
                 melody: "melody/004.mp3",
                 backing: "backing/004.mp3"
             },
             "005": {
-                source: "歌曲來源：We Wish You a Merry Christmas",
+                source: "原曲：We Wish You a Merry Christmas",
                 tone_answer: "0-4-4-3-4-2-0-0",
                 image: "score/005.png",
                 melody: "melody/005.mp3",
                 backing: "backing/005.mp3"
             },
             "006": {
-                source: "歌曲來源：Jungle Bells",
+                source: "原曲：Jingle Bells",
                 tone_answer: "2-2-2-2-2-2-2-3-0-0-2",
                 image: "score/006.png",
                 melody: "melody/006.mp3",
                 backing: "backing/006.mp3"
             },
             "007": {
-                source: "歌曲來源：多啦A夢",
+                source: "原曲：多啦A夢",
                 tone_answer: "0-4-4-2-3-2-4",
                 image: "score/007.png",
                 melody: "melody/007.mp3",
                 backing: "backing/007.mp3"
             },
             "008": {
-                source: "歌曲來源：It's a Small World",
+                source: "原曲：It's a Small World",
                 tone_answer: "4-4-3-4-3-3-3",
                 image: "score/008.png",
                 melody: "melody/008.mp3",
                 backing: "backing/008.mp3"
             },
             "009": {
-                source: "歌曲來源：Lonely Christmas",
+                source: "原曲：Lonely Christmas",
                 tone_answer: "2-4-2-4-4-3",
                 image: "score/009.png",
                 melody: "melody/009.mp3",
                 backing: "backing/009.mp3"
             },
             "010": {
-                source: "歌曲來源：Greensleeves",
+                source: "原曲：Greensleeves",
                 tone_answer: "0-4-4-3-3-3-4-2-0",
                 image: "score/010.png",
                 melody: "melody/010.mp3",
@@ -222,6 +225,23 @@
                 box.style.display = 'block';
             }
         }
+    </script>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const isDark = localStorage.getItem('darkMode') === 'true';
+
+        if (isDark) {
+        body.classList.add('dark');
+        toggle.textContent = '☀️';
+        }
+
+        toggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        const darkMode = body.classList.contains('dark');
+        toggle.textContent = darkMode ? '☀️' : '🌙';
+        localStorage.setItem('darkMode', darkMode);
+        });
     </script>
 </body>
 </html>

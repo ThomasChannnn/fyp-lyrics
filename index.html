@@ -10,7 +10,10 @@
 <body>
 
     <header class="navbar">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto;">
         <a href="index.html">🏠 填詞大師 Board Game</a>
+        <button id="theme-toggle" class="btn" style="width: auto; padding: 10px 20px; font-size: 1rem;">🌙</button>
+        </div>
     </header>
 
     <main class="container">
@@ -18,9 +21,12 @@
         <section class="card">
             <h2>📜 遊戲規則</h2>
             <ul style="padding-left: 20px;">
-                <li>抽取一張<strong>旋律卡</strong>。</li>
-                <li>掃瞄 QR Code 或輸入編號。</li>
-                <li>聆聽旋律並填詞。</li>
+                <li>每個玩家抽5張<strong>歌詞卡</strong>。</li>
+                <li>抽1張<strong>旋律卡</strong>。</li>
+                <li>掃瞄 QR Code 或者輸入題目編號。</li>
+                <li>聆聽旋律。</li>
+                <li>估下<strong>音調（0243），</strong>之後揀<strong>1張歌詞卡</strong>填詞。</li>
+                <li>展示答案，大家投票選出最合適嘅歌詞！</li>
             </ul>
         </section>
 
@@ -120,6 +126,23 @@
         function onScanError(errorMessage) {
             // Ignore errors (scanning empty space)
         }
+    </script>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const isDark = localStorage.getItem('darkMode') === 'true';
+
+        if (isDark) {
+        body.classList.add('dark');
+        toggle.textContent = '☀️';
+        }
+
+        toggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        const darkMode = body.classList.contains('dark');
+        toggle.textContent = darkMode ? '☀️' : '🌙';
+        localStorage.setItem('darkMode', darkMode);
+        });
     </script>
 </body>
 </html>
