@@ -68,7 +68,7 @@
             <section class="card">
                 <span class="label-text">🎵 樂譜 (Music Score)</span>
                 
-                <img id="img-score" src="" alt="Music Score" class="score-image">
+                <img id="img-score" src="" data-path="score/" alt="Music Score" class="score-image">
                 
                 <p id="display-source" class="source-text"></p>
             </section>
@@ -93,87 +93,9 @@
 
     </main>
 
-    <script>
-        // ---------------------------------------------------------
-        // 1. THE DATABASE
-        // ---------------------------------------------------------
-        const songDatabase = {
-            "001": {
-                source: "原曲：Old MacDonald Had a Farm",
-                tone_answer: "4-4-4-0-2-2-0",
-                image: "score/001.png",
-                melody: "melody/001.mp3",
-                backing: "backing/001.mp3"
-            },
-            "002": {
-                source: "原曲：Twinkle Twinkle Little Star",
-                tone_answer: "0-0-4-4-3-3-4",
-                image: "score/002.png",
-                melody: "melody/002.mp3",
-                backing: "backing/002.mp3"
-            },
-            "003": {
-                source: "原曲：London Bridge is Falling Down",
-                tone_answer: "4-3-3-4-2-4-3",
-                image: "score/003.png",
-                melody: "melody/003.mp3",
-                backing: "backing/003.mp3"
-            },
-            "004": {
-                source: "原曲：Happy Birthday to You",
-                tone_answer: "0-0-2-0-4-2",
-                image: "score/004.png",
-                melody: "melody/004.mp3",
-                backing: "backing/004.mp3"
-            },
-            "005": {
-                source: "原曲：We Wish You a Merry Christmas",
-                tone_answer: "0-4-4-3-4-2-0-0",
-                image: "score/005.png",
-                melody: "melody/005.mp3",
-                backing: "backing/005.mp3"
-            },
-            "006": {
-                source: "原曲：Jingle Bells",
-                tone_answer: "2-2-2-2-2-2-2-3-0-0-2",
-                image: "score/006.png",
-                melody: "melody/006.mp3",
-                backing: "backing/006.mp3"
-            },
-            "007": {
-                source: "原曲：多啦A夢",
-                tone_answer: "0-4-4-2-3-2-4",
-                image: "score/007.png",
-                melody: "melody/007.mp3",
-                backing: "backing/007.mp3"
-            },
-            "008": {
-                source: "原曲：It's a Small World",
-                tone_answer: "4-4-3-4-3-3-3",
-                image: "score/008.png",
-                melody: "melody/008.mp3",
-                backing: "backing/008.mp3"
-            },
-            "009": {
-                source: "原曲：Lonely Christmas",
-                tone_answer: "2-4-2-4-4-3",
-                image: "score/009.png",
-                melody: "melody/009.mp3",
-                backing: "backing/009.mp3"
-            },
-            "010": {
-                source: "原曲：Greensleeves",
-                tone_answer: "0-4-4-3-3-3-4-2-0",
-                image: "score/010.png",
-                melody: "melody/010.mp3",
-                backing: "backing/010.mp3"
-            }
-        };
+    <script src="database.js"></script>
 
-        // ---------------------------------------------------------
-        // 2. PAGE LOGIC
-        // ---------------------------------------------------------
-        
+    <script>
         // Get ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const currentId = urlParams.get('id');
@@ -189,17 +111,17 @@
         // Check ID and Render
         if (currentId && songDatabase[currentId]) {
             const data = songDatabase[currentId];
-            console.log("Loading Question:", currentId);
 
             // 1. Text Info
             titleEl.innerText = "題目編號 #" + currentId;
             sourceEl.innerText = data.source;
-            toneAnswerEl.innerText = data.tone_answer;
+            // Join the list with dashes
+            toneAnswerEl.innerText = data.tone_answer.join('-');
 
-            // 2. Media Paths (Assuming everything is in 'assets' folder)
-            imgEl.src = "assets/" + data.image;       // e.g. assets/score/001.png
-            melodyEl.src = "assets/" + data.melody;   // e.g. assets/melody/001.mp3
-            backingEl.src = "assets/" + data.backing; // e.g. assets/backing/001.mp3
+            // 2. Media Paths (Combined here)
+            imgEl.src = "assets/score/" + data.image;       
+            melodyEl.src = "assets/melody/" + data.melody;   
+            backingEl.src = "assets/backing/" + data.backing;
             
             // 3. Refresh Audio
             melodyEl.load();
@@ -209,21 +131,17 @@
             // Error Handling
             titleEl.innerText = "題目不存在";
             document.querySelector('.container').innerHTML = 
-                "<div class='card text-center'>" +
-                "<h1 style='color:red;'>❌ 找不到題目</h1>" +
-                "<p>編號 #" + (currentId || "Unknown") + " 不在資料庫中。</p>" +
-                "<a href='index.html' class='btn btn-primary'>返回首頁</a>" +
-                "</div>";
+                `<div class='card text-center'>
+                    <h1 style='color:red;'>❌ 找不到題目</h1>
+                    <p>編號 #${currentId || "Unknown"} 不在資料庫中。</p>
+                    <a href='index.html' class='btn btn-primary'>返回首頁</a>
+                </div>`;
         }
 
         // Toggle Answer Visibility
         function showAnswer() {
             const box = document.getElementById('tone-answer-display');
-            if (box.style.display === 'block') {
-                box.style.display = 'none';
-            } else {
-                box.style.display = 'block';
-            }
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
     </script>
     <script>

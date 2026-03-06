@@ -264,6 +264,11 @@ audio {
     font-style: italic;      /* Italic looks better for citations */
 }
 
+.source-text::before {
+    content: "原曲：";
+    margin-right: 4px;       /* Adds a little breathing room */
+}
+
 :root {
   --bg-color-dark: #1a1a1a;
   --text-color-dark: #e0e0e0;
