@@ -23,7 +23,6 @@ body {
   padding-bottom: 40px;
 }
 
-/* --- Banner / Navigation --- */
 .navbar {
   background-color: var(--primary-color);
   color: white;
@@ -46,21 +45,18 @@ body {
   gap: 10px;
 }
 
-/* --- Layout Container --- */
 
 .container {
-  max-width: 1000px; /* Optimized for mobile view */
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* --- Headings --- */
 h1, h2, h3 {
   margin-bottom: 15px;
   color: #2c3e50;
 }
 
-/* --- Cards --- */
 .card {
   background: var(--card-bg);
   border-radius: var(--radius);
@@ -69,7 +65,6 @@ h1, h2, h3 {
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-/* --- Forms & Inputs --- */
 .input-group {
   display: flex;
   flex-direction: column;
@@ -85,7 +80,6 @@ input[type="text"], input[type="number"] {
   width: 100%;
 }
 
-/* --- Buttons --- */
 .btn {
   display: block;
   width: 100%;
@@ -115,13 +109,12 @@ input[type="text"], input[type="number"] {
   opacity: 0.8;
 }
 
-/* --- Question Page Specifics --- */
 .score-image {
   display: block;
-  width: 100%;         /* Make it fit the screen width */
-  height: auto;        /* CRITICAL: Let height scale proportionally */
-  max-width: 100%;     /* Ensure it never overflows */
-  border-radius: 8px;  /* Optional: Rounded corners */
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     
   background-color: #f0f0f0; 
@@ -144,20 +137,16 @@ audio {
   border-radius: 30px;
 }
 
-/* Utilities */
 .text-center { text-align: center; }
 .mt-2 { margin-top: 20px; }
 
-/* --- QR Scanner Customization --- */
-
 #reader {
-    background-color: #000000; /* Black background for video */
+    background-color: #000000;
     border-radius: 8px;
     padding: 10px;
-    color: #ffffff; /* Make default text WHITE */
+    color: #ffffff;
 }
 
-/* Fix the status text (e.g., "Requesting permission...") */
 #reader__status_span {
     color: #ffffff !important; 
     font-size: 1.1rem;
@@ -166,7 +155,6 @@ audio {
     margin-bottom: 10px;
 }
 
-/* Fix the 'Request Camera Permission' button */
 #reader__dashboard_section_csr button {
     background-color: var(--primary-color) !important;
     color: white !important;
@@ -178,20 +166,18 @@ audio {
     margin-top: 10px;
 }
 
-/* Hide the "Scan an Image File" link if you don't want it */
 #reader__dashboard_section_swaplink {
     display: none !important; 
 }
 
-/* --- Pop-up Modal Styles --- */
 .modal-overlay {
-    display: none; /* Hidden by default */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark dimmed background */
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -207,7 +193,6 @@ audio {
     text-align: center;
 }
 
-/* Close Button (X) */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -220,18 +205,16 @@ audio {
     border: none;
 }
 
-/* Scanner Box inside Modal */
 #reader {
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
     margin-top: 10px;
-    background: black; /* Prevent white flash before camera loads */
+    background: black;
 }
 
-/* --- 0243 Bonus Game Styles --- */
 .tone-section {
-    background-color: #FFF8E1; /* Light yellow to make it stand out */
+    background-color: #FFF8E1;
     border: 2px dashed #FFC107;
     text-align: center;
 }
@@ -239,7 +222,7 @@ audio {
 .tone-answer-box, 
 .hint-answer-box {
     margin-top: 15px;
-    font-size: 2.5rem; /* Increased from 2rem */
+    font-size: 2.5rem;
     font-weight: bold;
     letter-spacing: 3px;
     color: var(--primary-color);
@@ -248,18 +231,17 @@ audio {
     border-radius: 8px;
     display: none; 
     line-height: 1.2;
-    word-break: break-word; /* Prevents long lyrics from overflowing */
+    word-break: break-word;
 }
 
 .btn-reveal {
-    background-color: #FFC107; /* Amber color */
+    background-color: #FFC107;
     color: #333;
     margin-top: 10px;
 }
 
-/* Force high contrast for the score regardless of theme */
 #paper { 
-    background-color: #ffffff !important; /* Always white background */
+    background-color: #ffffff !important;
     padding: 10px; 
     border: 1px solid #ccc; 
     border-radius: 8px;
@@ -267,27 +249,24 @@ audio {
     margin-top: 10px;
 }
 
-/* Ensure the SVG notes and lines are solid black */
 #paper svg { 
     display: block; 
     margin: 0 auto;
     fill: #000000 !important; 
 }
 
-/* Target specific ABCJS paths to prevent them from inheriting dark mode text colors */
 #paper svg path, 
 #paper svg text, 
 #paper svg rect {
     fill: #000000 !important;
 }
 
-/* --- Source Text Style --- */
 .source-text {
-    font-size: 0.85rem;      /* Small size */
-    color: #999;             /* Grey color */
-    text-align: center;      /* Centered */
-    margin-top: 10px;        /* Space between image and text */
-    font-style: italic;      /* Italic looks better for citations */
+    font-size: 0.85rem;
+    color: #999;
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
 }
 
 :root {

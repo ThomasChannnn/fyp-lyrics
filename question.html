@@ -35,7 +35,6 @@
             color: #666;
             font-style: italic;
         }
-        /* Dark mode compatibility */
         body.dark #paper { background: #fff; }
         body.dark #melody-player-container { background: #333; border-color: #444; }
         body.dark .abcjs-inline-audio { filter: invert(1) hue-rotate(180deg); }
@@ -98,9 +97,9 @@
                         const id = row.id.toString().trim().padStart(3, '0');
                         songDatabase[id] = {
                             id: id,
-                            source: row.source, // Make sure we store the source name
+                            source: row.source,
                             abc: row.abc, 
-                            hint: row.hint || "未有題目提供", // Add this line to capture the hint
+                            hint: row.hint || "未有題目提供",
                             tone_answer: row.tone_answer ? row.tone_answer.replace(/[\[\]"]/g, '').split(',') : []
                         };
                     }
@@ -128,28 +127,24 @@
             document.getElementById('display-source').innerText = "原曲: " + (data.source || "未知");
 
             if (data.abc) {
-                // 1. Prepare ABC string
                 const rawAbc = data.abc.replace(/\\n/g, "\n"); 
                 const fullAbc = `X:${data.id}\nT:\nM:none\nQ:1/4=100\nK:C\nL:1/16\n${rawAbc}`;
 
-                // 2. Render Score
                 const visualObj = ABCJS.renderAbc("paper", fullAbc, { 
                     responsive: "resize",
-                    scale: 2,          // Increased significantly for visibility
-                    staffwidth: 300,     // Total drawing width
+                    scale: 2,
+                    staffwidth: 300,
                     paddingleft: 0,
                     paddingright: 0,
                     add_classes: true
                 })[0];
 
-                // 3. Force the SVG to fill the container width via CSS
                 const svg = document.querySelector("#paper svg");
                 if (svg) {
                     svg.style.width = "100%";
                     svg.style.height = "auto";
                 }
 
-                // 4. Audio Initialization
                 if (ABCJS.synth.supportsAudio()) {
                     const synthControl = new ABCJS.synth.SynthController();
                     synthControl.load("#melody-player-container", null, {

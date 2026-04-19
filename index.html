@@ -11,7 +11,7 @@
 
     <header class="navbar">
         <div style="display: flex; justify-content: space-between; align-items: center; max-width: 80%; margin: 0 auto;">
-        <a href="index.html">🏠 填詞大師 Board Game</a>
+        <a href="index.html">🏠 填詞大師</a>
         <button id="theme-toggle" class="btn" style="width: auto; padding: 10px 20px; font-size: 1rem;">🌙</button>
         </div>
     </header>
@@ -25,7 +25,7 @@
                 <li>抽1張<strong>旋律卡</strong>。</li>
                 <li>掃瞄 QR Code 或者輸入題目編號。</li>
                 <li>聆聽旋律。</li>
-                <li>估下<strong>音調（0243），</strong>之後揀<strong>1張歌詞卡</strong>填詞。</li>
+                <li>估下<strong>音調（0243），</strong>之後為歌詞缺漏嘅<strong>窿窿</strong>填詞。</li>
                 <li>展示答案，大家投票選出最合適嘅歌詞！</li>
             </ul>
         </section>
@@ -60,24 +60,18 @@
     </div>
 
     <script>
-        // Global variable to store the scanner instance
         let html5QrcodeScanner = null;
 
-        // --- 1. Manual Navigation ---
         function goToQuestionManual() {
             const input = document.getElementById('questionInput').value;
             if(input) window.location.href = 'question.html?id=' + input;
             else alert("請輸入編號！");
         }
 
-        // --- 2. Open Modal & Start Camera ---
         function openScanner() {
-            // Show the modal
             document.getElementById('scannerModal').style.display = 'flex';
             document.getElementById('scanStatus').innerText = "啟動相機中...";
 
-            // Initialize Scanner
-            // We use a small timeout to let the modal animation finish effectively
             setTimeout(() => {
                 html5QrcodeScanner = new Html5QrcodeScanner(
                     "reader", 
@@ -88,18 +82,14 @@
                     false
                 );
                 
-                // Start rendering the camera
                 html5QrcodeScanner.render(onScanSuccess, onScanError);
                 document.getElementById('scanStatus').innerText = "正在掃瞄...";
             }, 100);
         }
 
-        // --- 3. Close Modal & Stop Camera ---
         function closeScanner() {
-            // Hide the modal
             document.getElementById('scannerModal').style.display = 'none';
 
-            // Stop the camera to save battery
             if (html5QrcodeScanner) {
                 html5QrcodeScanner.clear().then(() => {
                     console.log("Camera stopped.");
@@ -109,11 +99,9 @@
             }
         }
 
-        // --- 4. Success Logic ---
         function onScanSuccess(decodedText, decodedResult) {
             document.getElementById('scanStatus').innerText = "✅ 成功！跳轉中...";
             
-            // Stop scanning immediately so it doesn't scan twice
             html5QrcodeScanner.clear();
 
             if (decodedText.includes("question.html")) {
@@ -124,7 +112,6 @@
         }
 
         function onScanError(errorMessage) {
-            // Ignore errors (scanning empty space)
         }
     </script>
     <script>
