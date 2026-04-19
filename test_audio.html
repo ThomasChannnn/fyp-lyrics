@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>abcjs Audio Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://paulrosen.github.io/abcjs/abcjs-midi.css">
+</head>
+<body>
+    <h1>abcjs MIDI Player</h1>
+    
+    <div id="midi-id"></div>
+    
+    <div style="margin-top: 20px;">
+        <button onclick="playMidi()" style="margin: 5px; padding: 10px 20px;">Play</button>
+        <button onclick="stopMidi()" style="margin: 5px; padding: 10px 20px;">Stop</button>
+        <button onclick="restartMidi()" style="margin: 5px; padding: 10px 20px;">Restart</button>
+        <button onclick="toggleLoop()" style="margin: 5px; padding: 10px 20px;">Toggle Loop</button>
+        <button onclick="setProgress()" style="margin: 5px; padding: 10px 20px;">Set Progress (33%)</button>
+    </div>
+
+    <script src="https://paulrosen.github.io/abcjs/abcjs-6.4.4-min.js"></script>
+    <script>
+        const abcString = `X:1\nT:Test\nM:4/4\nL:1/8\nK:C\nCDEFGABc`;
+
+        // Render MIDI
+        abcjs.renderMidi("midi-id", abcString, {});
+
+        function playMidi() {
+            const midiElement = document.querySelector(".abcjs-inline-midi");
+            if (midiElement) {
+                abcjs.midi.startPlaying(midiElement);
+            }
+        }
+
+        function stopMidi() {
+            abcjs.midi.stopPlaying();
+        }
+
+        function restartMidi() {
+            abcjs.midi.restartPlaying();
+        }
+
+        function toggleLoop() {
+            const midiElement = document.querySelector(".abcjs-inline-midi");
+            if (midiElement) {
+                abcjs.midi.setLoop(midiElement, true);
+            }
+        }
+
+        function setProgress() {
+            abcjs.midi.setRandomProgress(0.33);
+        }
+    </script>
+</body>
+</html>

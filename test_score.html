@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABCJS Playback Fixed</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/dist/abcjs-midi-min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/abcjs@6.4.0/abcjs-midi.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.5; }
+        #notation { background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; margin-top: 20px; padding: 10px; }
+        #audio { margin: 20px 0; min-height: 50px; }
+        button { padding: 10px 20px; cursor: pointer; background: #28a745; color: white; border: none; border-radius: 4px; font-weight: bold; }
+        button:hover { background: #218838; }
+        .audio-error { color: #dc3545; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>ABCJS Rendering & Playback</h1>
+    
+    <div id="paper"></div>
+    <div id="midi-id"></div>
+    <button id="start-play">Start Playing</button>
+    <button id="stop-play">Stop Playing</button>
+    <button id="restart-play">Restart Playing</button>
+    <button id="loop-toggle">Toggle Loop</button>
+
+    <script>
+    var abcString = "T: Cooley's\n" +
+    "M: 4/4\n" +
+    "L: 1/8\n" +
+    "R: reel\n" +
+    "K: Emin\n" +
+    "|:D2|EB{c}BA B2 EB|~B2 AB dBAG|FDAD BDAD|FDAD dAFD|\n" +
+    "EBBA B2 EB|B2 AB defg|afe^c dBAF|DEFD E2:|\n" +
+    "|:gf|eB B2 efge|eB B2 gedB|A2 FA DAFA|A2 FA defg|\n" +
+    "eB B2 eBgB|eB B2 defg|afe^c dBAF|DEFD E2:|";
+
+    // Render the ABC notation
+    ABCJS.renderAbc("paper", abcString, {});
+
+    // Render the MIDI player
+    ABCJS.renderMidi("midi-id", abcString, {});
+
+    let loopEnabled = false;
+
+    // Add event listeners for controls
+    document.getElementById("start-play").addEventListener("click", () => {
+        ABCJS.midi.startPlaying(document.querySelector(".abcjs-inline-midi"));
+    });
+
+    document.getElementById("stop-play").addEventListener("click", () => {
+        ABCJS.midi.stopPlaying();
+    });
+
+    document.getElementById("restart-play").addEventListener("click", () => {
+        ABCJS.midi.restartPlaying();
+    });
+
+    document.getElementById("loop-toggle").addEventListener("click", () => {
+        loopEnabled = !loopEnabled;
+        ABCJS.midi.setLoop(document.querySelector(".abcjs-inline-midi"), loopEnabled);
+    });
+    </script>
+</body>
+</html>

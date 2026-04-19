@@ -47,8 +47,9 @@ body {
 }
 
 /* --- Layout Container --- */
+
 .container {
-  max-width: 600px; /* Optimized for mobile view */
+  max-width: 1000px; /* Optimized for mobile view */
   margin: 0 auto;
   padding: 20px;
 }
@@ -235,24 +236,49 @@ audio {
     text-align: center;
 }
 
-.tone-answer-box {
+.tone-answer-box, 
+.hint-answer-box {
     margin-top: 15px;
-    font-size: 2rem;
+    font-size: 2.5rem; /* Increased from 2rem */
     font-weight: bold;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     color: var(--primary-color);
     background: #fff;
-    padding: 10px;
+    padding: 15px;
     border-radius: 8px;
-    
-    /* Hide the answer initially */
     display: none; 
+    line-height: 1.2;
+    word-break: break-word; /* Prevents long lyrics from overflowing */
 }
 
 .btn-reveal {
     background-color: #FFC107; /* Amber color */
     color: #333;
     margin-top: 10px;
+}
+
+/* Force high contrast for the score regardless of theme */
+#paper { 
+    background-color: #ffffff !important; /* Always white background */
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+/* Ensure the SVG notes and lines are solid black */
+#paper svg { 
+    display: block; 
+    margin: 0 auto;
+    fill: #000000 !important; 
+}
+
+/* Target specific ABCJS paths to prevent them from inheriting dark mode text colors */
+#paper svg path, 
+#paper svg text, 
+#paper svg rect {
+    fill: #000000 !important;
 }
 
 /* --- Source Text Style --- */
@@ -262,11 +288,6 @@ audio {
     text-align: center;      /* Centered */
     margin-top: 10px;        /* Space between image and text */
     font-style: italic;      /* Italic looks better for citations */
-}
-
-.source-text::before {
-    content: "原曲：";
-    margin-right: 4px;       /* Adds a little breathing room */
 }
 
 :root {
