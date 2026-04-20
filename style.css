@@ -1,8 +1,6 @@
-/* style.css */
-
 :root {
-  --primary-color: #4A90E2; /* Music Blue */
-  --secondary-color: #50E3C2; /* Teal Accent */
+  --primary-color: #4A90E2;
+  --secondary-color: #50E3C2;
   --bg-color: #F5F7FA;
   --text-color: #333333;
   --card-bg: #FFFFFF;
